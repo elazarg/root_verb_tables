@@ -5,16 +5,13 @@ PRE = '_'
 
 def read_template(basedir):
     ROOTS = basedir + '/roots.txt'
-    PROTO = basedir + '/proto.txt'
     TABLE = basedir + '/table.tsv'
-
-    with open(PROTO, encoding='utf8') as f:
-        proto = f.read().strip()
 
     with open(ROOTS, encoding='utf8') as f:
         roots = [line.split()[::-1] for line in f.read().split('\n')]
 
     with open(TABLE, encoding='utf8') as f:
+        proto = next(f).strip()
         templates = f.read()
 
     return proto, roots, templates
