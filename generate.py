@@ -23,7 +23,11 @@ def read_template(basedir):
 def instantiate(proto, root, templates):
     res = templates
     for p, c in zip(proto, root):
-        res = res.replace(PRE + p, c)
+        res = res.replace(PRE + p, PRE + c)
+
+    # apply the only linguistic rule:
+    # ננ -> נ
+    res = res.replace('ננה\t', 'נה\t')
 
     return res\
         .replace('כ\n', 'ך\n')\
