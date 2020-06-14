@@ -43,7 +43,7 @@ def instantiate_random(basedir):
 if __name__ == '__main__':
     # print(instantiate_random('שלמים'))
     print()
-    print(instantiate_random('שלמים_פשס'))
+    print(instantiate_random('נליה'))
     print()
     # print(instantiate_random('מרובעים'))
     print()
