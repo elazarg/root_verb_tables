@@ -26,11 +26,11 @@ def instantiate(proto, root, templates):
         res = res.replace(PRE + p, c)
 
     return res\
-        .replace(PRE + 'כ', 'ך')\
-        .replace(PRE + 'מ', 'ם')\
-        .replace(PRE + 'נ', 'ן')\
-        .replace(PRE + 'פ', 'ף')\
-        .replace(PRE + 'צ', 'ץ')\
+        .replace('כ' + PRE, 'ך')\
+        .replace('מ' + PRE, 'ם')\
+        .replace('נ' + PRE, 'ן')\
+        .replace('פ' + PRE, 'ף')\
+        .replace('צ' + PRE, 'ץ')\
         .replace(PRE, '')
 
 
@@ -43,8 +43,10 @@ def instantiate_random(basedir):
 if __name__ == '__main__':
     # print(instantiate_random('שלמים'))
     print()
+    print(instantiate_random('שלמים_פשס'))
+    print()
     # print(instantiate_random('מרובעים'))
     print()
-    print(instantiate_random('מרובעים_פדטת'))
+    # print(instantiate_random('מרובעים_פדטת'))
     print()
     # print(instantiate_random('מרובעים_פשס'))
