@@ -41,13 +41,14 @@ def instantiate(proto, root, templates):
 def instantiate_random(basedir):
     proto, roots, templates = read_template(basedir)
     root = random.choice(roots)
+    print(''.join(root))
     return instantiate(proto, root, templates)
 
 
 if __name__ == '__main__':
     print(instantiate_random('3/' + 'שלמים'))
     print()
-    print(instantiate_random('3/' + 'נפיו'))
+    # print(instantiate_random('3/' + 'נפיו'))
     print()
     # print(instantiate_random('מרובעים'))
     print()
