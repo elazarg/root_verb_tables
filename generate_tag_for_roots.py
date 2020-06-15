@@ -64,7 +64,7 @@ def tag(n):
         for root in roots:
             t = tag(root)
             c[t] += 1
-            print(*root, t, sep='\t', file=f)
+            print(''.join(root), *root, t, sep='\t', file=f)
 
     total = 0
     for k, v in sorted(c.items(), key=lambda x: x[1]):

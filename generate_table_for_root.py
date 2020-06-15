@@ -23,12 +23,13 @@ def instantiate(proto, root, templates):
 
 def read_random_template(n):
     with open('roots_{}_tagged.tsv'.format(n), encoding='utf8') as f:
-        roots = [line.split()[::-1] for line in f.read().split('\n')]
+        roots = [line.split() for line in f.read().split('\n')]
 
     choice = random.choice(roots)
     print(choice)
-    tag, *root = choice
+    w, *root, tag = choice
     print(''.join(root))
+    assert ''.join(root) == w
     print(tag)
 
     with open('{}/{}.tsv'.format(n, tag), encoding='utf8') as f:
