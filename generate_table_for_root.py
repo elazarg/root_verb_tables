@@ -4,9 +4,10 @@ PRE = '_'
 
 
 def instantiate(proto, root, templates):
+    NON_PRE = '~'
     res = templates
     for p, c in zip(proto, root):
-        res = res.replace(PRE + p, PRE + c)
+        res = res.replace(PRE + p, NON_PRE + c)
 
     # apply the only linguistic rule:
     # ננ -> נ
@@ -18,7 +19,7 @@ def instantiate(proto, root, templates):
         .replace('נ\n', 'ן\n')\
         .replace('פ\n', 'ף\n')\
         .replace('צ\n', 'ץ\n')\
-        .replace(PRE, '')
+        .replace(NON_PRE, '')
 
 
 def read_root(root, tag):
@@ -49,5 +50,14 @@ def read_template(w):
     return instantiate(proto, root, templates)
 
 
+def find_in_forms(s):
+    for w in roots:
+        if 'צ' in w:
+            out = read_template(w)
+            if 'אא' in out:
+                yield w
+
+
 if __name__ == '__main__':
+    #
     print(read_template(random.choice(roots)))
