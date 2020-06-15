@@ -8,11 +8,13 @@ def instantiate(proto, root, templates):
     NON_PRE = '~'
     res = templates
     for p, c in zip(proto, root):
+        # ו -> וו
+        if c == 'ו':
+            res = res + res.replace(PRE + p, PRE + p + PRE + p)
         res = res.replace(PRE + p, NON_PRE + c)
 
     # apply the only linguistic rule:
     # ננ -> נ
-    res = res.replace('ננה\t', 'נה\t')
 
     return res.replace(NON_PRE, '')
 
