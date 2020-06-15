@@ -16,6 +16,8 @@ def instantiate(proto, root, templates):
     # apply the only linguistic rule:
     # ננ -> נ
     res = res.replace('ננה\t', 'נה\t')
+    res = res.replace('ווו', 'וו')
+    res = res.replace('ייי', 'יי')
 
     return res.replace(NON_PRE, '')
 
