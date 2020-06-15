@@ -9,5 +9,4 @@ def open_file(filename, mode='r'):
 
 def read_roots(n):
     with open_file('roots_{}.txt'.format(n)) as f:
-        print(f.name)
         return [x.split()[::-1] for x in f.read().strip().split('\n')]
