@@ -1,6 +1,9 @@
 import random
+import os
 
 PRE = '_'
+
+BASEDIR = os.path.dirname(os.path.abspath(__file__)) + os.path.sep
 
 
 def instantiate(proto, root, templates):
@@ -23,7 +26,7 @@ def instantiate(proto, root, templates):
 
 
 def read_root(root, tag):
-    with open('{}/{}.tsv'.format(len(root), tag), encoding='utf8') as f:
+    with open(BASEDIR + '{}/{}.tsv'.format(len(root), tag), encoding='utf8') as f:
         proto = next(f).strip()
         templates = f.read()
     return proto, templates
@@ -32,7 +35,7 @@ def read_root(root, tag):
 def load_roots_map():
     roots_map = {}
     for n in [3, 4]:
-        with open('roots_{}_tagged.tsv'.format(n), encoding='utf8') as f:
+        with open(BASEDIR + 'roots_{}_tagged.tsv'.format(n), encoding='utf8') as f:
             for line in f.read().strip().split('\n'):
                 w, *root, tag = line.split()
                 roots_map[w] = (root, tag)
@@ -52,10 +55,9 @@ def read_template(w):
 
 def find_in_forms(s):
     for w in roots:
-        if 'צ' in w:
-            out = read_template(w)
-            if 'אא' in out:
-                yield w
+        out = read_template(w)
+        if s in out:
+            yield w
 
 
 if __name__ == '__main__':
