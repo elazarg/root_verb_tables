@@ -20,7 +20,7 @@ def tag_root_3(root):
         tag.append('פצ')
     elif a in ['ז', "ג'"]:
         tag.append('פז')
-    elif a in ['פ', "ש", "שׂ"]:
+    elif a in ['ס', "ש", "שׂ"]:
         tag.append('פשס')
     elif a in ['ט', 'ת', 'ד']:
         tag.append('פדטת')
@@ -45,7 +45,7 @@ def tag_root_4(root):
         return 'פצ'
     elif a in ['ז', "ג'"]:
         return 'פז'
-    elif a in ['פ', "ש", "שׂ"]:
+    elif a in ['ס', "ש", "שׂ"]:
         return 'פשס'
     elif a in ['ט', 'ד']:
         return 'פדט'

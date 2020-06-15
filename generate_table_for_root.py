@@ -21,23 +21,33 @@ def instantiate(proto, root, templates):
         .replace(PRE, '')
 
 
-def read_random_template(n):
-    with open('roots_{}_tagged.tsv'.format(n), encoding='utf8') as f:
-        roots = [line.split() for line in f.read().split('\n')]
-
-    choice = random.choice(roots)
-    print(choice)
-    w, *root, tag = choice
-    print(''.join(root))
-    assert ''.join(root) == w
-    print(tag)
-
-    with open('{}/{}.tsv'.format(n, tag), encoding='utf8') as f:
+def read_root(root, tag):
+    with open('{}/{}.tsv'.format(len(root), tag), encoding='utf8') as f:
         proto = next(f).strip()
         templates = f.read()
+    return proto, templates
 
+
+def load_roots_map():
+    roots_map = {}
+    for n in [3, 4]:
+        with open('roots_{}_tagged.tsv'.format(n), encoding='utf8') as f:
+            for line in f.read().strip().split('\n'):
+                w, *root, tag = line.split()
+                roots_map[w] = (root, tag)
+    return roots_map
+
+
+roots_map = load_roots_map()
+
+roots = list(roots_map)
+
+
+def read_template(w):
+    root, tag = roots_map[w]
+    proto, templates = read_root(root, tag)
     return instantiate(proto, root, templates)
 
 
 if __name__ == '__main__':
-    print(read_random_template(3))
+    print(read_template(random.choice(roots)))
