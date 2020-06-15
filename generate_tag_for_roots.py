@@ -1,7 +1,5 @@
 from collections import Counter
-import os
-
-BASEDIR = os.path.dirname(os.path.abspath(__file__)) + os.path.sep
+from root_verb_tables import heb_io
 
 
 def tag_root_3(root):
@@ -58,12 +56,11 @@ def tag_root_4(root):
 
 
 def tag(n):
-    with open(BASEDIR + 'roots_{}.txt'.format(n), encoding='utf8') as f:
-        roots = [line.strip().split()[::-1] for line in f]
+    roots = heb_io.read_roots(n)
     tag = tag_root_3 if n == 3 else tag_root_4
 
     c = Counter()
-    with open(BASEDIR + 'roots_{}_tagged.tsv'.format(n), 'w', encoding='utf8') as f:
+    with heb_io.open_file('roots_{}_tagged.tsv'.format(n), 'w') as f:
         for root in roots:
             t = tag(root)
             c[t] += 1
@@ -71,7 +68,7 @@ def tag(n):
 
     total = 0
     for k, v in sorted(c.items(), key=lambda x: x[1]):
-        with open(BASEDIR + '{}/{}.tsv'.format(n, k), encoding='utf8') as f:
+        with heb_io.open_file('{}/{}.tsv'.format(n, k)) as f:
             num_lines = len(f.read().strip().split('\n')) - 1
         print(k, v, num_lines)
         total += v * num_lines

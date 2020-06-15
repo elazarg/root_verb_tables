@@ -1,9 +1,7 @@
 import random
-import os
+from root_verb_tables import heb_io
 
 PRE = '_'
-
-BASEDIR = os.path.dirname(os.path.abspath(__file__)) + os.path.sep
 
 
 def instantiate(proto, root, templates):
@@ -16,17 +14,16 @@ def instantiate(proto, root, templates):
     # ננ -> נ
     res = res.replace('ננה\t', 'נה\t')
 
-    return res\
-        .replace('כ\n', 'ך\n')\
-        .replace('מ\n', 'ם\n')\
-        .replace('נ\n', 'ן\n')\
-        .replace('פ\n', 'ף\n')\
-        .replace('צ\n', 'ץ\n')\
-        .replace(NON_PRE, '')
+    return res.replace(NON_PRE, '')
+    # .replace('כ\n', 'ך\n')\
+    # .replace('מ\n', 'ם\n')\
+    # .replace('נ\n', 'ן\n')\
+    # .replace('פ\n', 'ף\n')\
+    # .replace('צ\n', 'ץ\n')\
 
 
 def read_root(root, tag):
-    with open(BASEDIR + '{}/{}.tsv'.format(len(root), tag), encoding='utf8') as f:
+    with heb_io.open_file('{}/{}.tsv'.format(len(root), tag)) as f:
         proto = next(f).strip()
         templates = f.read()
     return proto, templates
@@ -35,7 +32,7 @@ def read_root(root, tag):
 def load_roots_map():
     roots_map = {}
     for n in [3, 4]:
-        with open(BASEDIR + 'roots_{}_tagged.tsv'.format(n), encoding='utf8') as f:
+        with heb_io.open_file('roots_{}_tagged.tsv'.format(n)) as f:
             for line in f.read().strip().split('\n'):
                 w, *root, tag = line.split()
                 roots_map[w] = (root, tag)
@@ -61,5 +58,4 @@ def find_in_forms(s):
 
 
 if __name__ == '__main__':
-    #
     print(read_template(random.choice(roots)))
