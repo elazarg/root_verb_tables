@@ -47,6 +47,8 @@ def tag_root_4(root):
     elif a in ['ז', "ג'"]:
         return 'פז'
     elif a in ['ס', "ש", "שׂ"]:
+        if d in ['י', 'ה']:
+            return 'פשס_נליה'
         return 'פשס'
     elif a in ['ט', 'ד']:
         return 'פדט'
