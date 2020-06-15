@@ -15,11 +15,6 @@ def instantiate(proto, root, templates):
     res = res.replace('ננה\t', 'נה\t')
 
     return res.replace(NON_PRE, '')
-    # .replace('כ\n', 'ך\n')\
-    # .replace('מ\n', 'ם\n')\
-    # .replace('נ\n', 'ן\n')\
-    # .replace('פ\n', 'ף\n')\
-    # .replace('צ\n', 'ץ\n')\
 
 
 def read_root(root, tag):
@@ -48,13 +43,6 @@ def read_template(w):
     root, tag = roots_map[w]
     proto, templates = read_root(root, tag)
     return instantiate(proto, root, templates)
-
-
-def find_in_forms(s):
-    for w in roots:
-        out = read_template(w)
-        if s in out:
-            yield w
 
 
 if __name__ == '__main__':
