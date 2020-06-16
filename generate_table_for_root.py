@@ -16,10 +16,11 @@ def instantiate(proto, root, templates):
     # apply the only linguistic rule:
     # ננ -> נ
     res = res.replace('ננה\t', 'נה\t')
+    res = res.replace(NON_PRE, '')
+    res = res.replace('ווו', 'וו')
     res = res.replace('ווו', 'וו')
     res = res.replace('ייי', 'יי')
-
-    return res.replace(NON_PRE, '')
+    return res
 
 
 def read_root(root, tag):
@@ -44,7 +45,7 @@ roots_map = load_roots_map()
 roots = list(roots_map)
 
 
-def read_template(w):
+def read_template(w) -> str:
     root, tag = roots_map[w]
     proto, templates = read_root(root, tag)
     return instantiate(proto, root, templates)
