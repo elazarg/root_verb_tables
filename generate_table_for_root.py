@@ -40,20 +40,20 @@ def load_roots_map(numbers):
     return roots_map
 
 
-roots_map_3 = load_roots_map([3])
-roots_map_4 = load_roots_map([4])
-roots_map_all = load_roots_map([3, 4])
+roots_map = {
+    '3': load_roots_map([3]),
+    '4': load_roots_map([4]),
+    'combined': load_roots_map([3, 4])
+}
 
-roots_3 = list(roots_map_3)
-roots_4 = list(roots_map_4)
-roots_all = list(roots_map_all)
+roots = {k: roots_map[k] for k in roots_map}
 
 
 def read_template(w) -> str:
-    root, tag = roots_map_all[w]
+    root, tag = roots_map['combined'][w]
     proto, templates = read_root(root, tag)
     return instantiate(proto, root, templates)
 
 
 if __name__ == '__main__':
-    print(read_template(random.choice(roots_all)))
+    print(read_template(random.choice(roots['combined'])))
