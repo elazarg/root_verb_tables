@@ -34,7 +34,7 @@ def tag_root_3(root):
     elif c in ['י', 'ה']:
         tag.append('נליה')
 
-    if b == c:
+    if b == c and b != 'י':
         tag.append('כפולים')
 
     return '_'.join(tag) or 'שלמים'
