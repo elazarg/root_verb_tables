@@ -4,6 +4,7 @@ from root_verb_tables import heb_io
 
 def tag_root_3(root):
     a, b, c = root
+    root = ''.join(root)
     if root in "אבי אפי אמר אבד אהב אהד אכל".split():
         return 'נפא'
     if root in 'יצב יצק יצע יצת יצג יצר יזע יזמ'.split():
