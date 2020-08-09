@@ -5,16 +5,12 @@ from root_verb_tables import heb_io
 def tag_root_3(root):
     a, b, c = root
     root = ''.join(root)
-    if root in "אבי אפי אמר אבד אהב אהד אכל".split():
-        return 'נפא'
+    # if root in "אבי אפי אמר אבד אהב אהד אכל".split():
+    #     return 'נפא'
     if root in 'יצב יצק יצע יצת יצג יצר יזע יזמ'.split():
         return 'חפיצ'
     tag = []
-    h = "נבכ נבל נבע נבר נגה נגח " \
-        "נגנ נגע נגפ נגר נגש נדח נדי נדפ נדר נזי נזל נזר נטי נטל " \
-        "נטע נטפ נכי נכר נכש נסח נסי נסכ נסע נסק נסר נפח נפט נפל " \
-        " נפע נצל נצר נשא נשב נשכ נשל נשק נשׂא נתב נתז נתנ נתק נתר ".split()
-    if root in h:
+    if a == 'נ' and b in ['ט', 'ב', 'ג', 'כ', 'ז', 'ד', 'ת', 'ש']:
         tag.append('חפנ')
     elif a in 'יו':
         tag.append('נפיו')
@@ -30,12 +26,12 @@ def tag_root_3(root):
     if b in ['י', 'ו']:
         tag.append('נעו')
 
-    if root in "קרא מצא סמא חבא נשא".split():
-        tag.append('נלא')
-    elif c in ['י', 'ה']:
+    # if root in "קרא מצא סמא חבא נשא".split():
+    #     tag.append('נלא')
+    if c in ['י', 'ה']:
         tag.append('נליה')
 
-    if b == c and b != 'י':
+    if b == c and b != 'י' and "חפנ" not in tag:
         tag.append('כפולים')
 
     return '_'.join(tag) or 'שלמים'
