@@ -1,4 +1,6 @@
 import random
+import re
+
 from root_verb_tables import heb_io
 
 PRE = '_'
@@ -9,7 +11,7 @@ def instantiate(proto, radicals, templates):
     res = templates
     for p, c in zip(proto, radicals):
         # ו -> וו
-        if c in ['ו', 'י']:
+        if c in ['ו']: # , 'י']:
             res = res + res.replace(PRE + p, PRE + p + PRE + p)
         res = res.replace(PRE + p, NON_PRE + c)
 
@@ -60,6 +62,22 @@ def load_all_root_maps():
 def read_template(radicals, tag) -> str:
     proto, templates = read_root(radicals, tag)
     return instantiate(proto, radicals, templates)
+
+
+def load_templates(radicals):
+    import itertools
+    from root_verb_tables.generate_tag_for_roots import tag_root_3
+    seen = set()
+    skipped = False
+    for line in read_template(radicals, tag_root_3(radicals)).strip().split('\n'):
+        key = line.rsplit(maxsplit=1)[0]
+        if key in seen:
+            continue
+        seen.add(key)
+        if not skipped and re.findall(r'_\s+_\s+_', line):
+            continue
+        skipped = True
+        yield line.split()
 
 
 if __name__ == '__main__':
